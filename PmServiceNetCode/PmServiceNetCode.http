@@ -1,0 +1,6 @@
+@PmServiceNetCode_HostAddress = http://localhost:5159
+
+GET {{PmServiceNetCode_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
