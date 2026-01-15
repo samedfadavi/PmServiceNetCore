@@ -11,7 +11,7 @@
         "projectName": "PmServiceNetCode",
         "projectPath": "D:\\Developping\\DotNet\\PmServiceNetCore\\PmServiceNetCode\\PmServiceNetCode.csproj",
         "packagesPath": "C:\\Users\\aaaa\\.nuget\\packages\\",
-        "outputPath": "D:\\Developping\\DotNet\\PmserviceNetCore\\PmServiceNetCode\\obj\\",
+        "outputPath": "D:\\Developping\\DotNet\\PmServiceNetCore\\PmServiceNetCode\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",

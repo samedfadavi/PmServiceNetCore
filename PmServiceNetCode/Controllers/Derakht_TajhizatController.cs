@@ -15,12 +15,17 @@ namespace pmService.Controllers
         private readonly MaznetModel _db;
         private readonly ClassData _data;
 
-        public Derakht_TajhizatController(
-            MaznetModel db,
-            ClassData data)
+        private readonly ISqlDataAccess _sqlData;
+        private readonly IProcedureDataAccess _procData;
+
+        public Derakht_TajhizatController(ISqlDataAccess sqlData, IProcedureDataAccess procData)
         {
-            _db = db;
-            _data = data;
+            _sqlData = sqlData;
+            _procData = procData;
+            var configuration = new ConfigurationBuilder()
+    .AddJsonFile("appsettings.json")
+    .Build();
+            _data = new ClassData(configuration);
         }
 
         // ==========================
@@ -61,8 +66,8 @@ namespace pmService.Controllers
                 if (!AllowedTables.Contains(table))
                     throw new SecurityException("Invalid table");
 
-                if (!AllowedColumns.Contains(fieldName) ||
-                    !AllowedColumns.Contains(fieldCode))
+                if (!AllowedColumns.Contains(fieldName)
+                    )
                     throw new SecurityException("Invalid column");
 
                 if (i++ > 0)

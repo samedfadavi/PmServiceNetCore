@@ -1,9 +1,11 @@
+
 using Infrastructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+builder.Services.AddScoped<ISqlDataAccess, ClassData>();
+builder.Services.AddScoped<IProcedureDataAccess, ClassData>();
 builder.Services.AddControllers();
 builder.Services.AddScoped<ClassData>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
