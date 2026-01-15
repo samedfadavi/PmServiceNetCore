@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "+omVfTod2ds=",
+  "dgSpecHash": "uqBmc4MKaEo=",
   "success": true,
-  "projectFilePath": "D:\\Developping\\DotNet\\PmserviceNetCore\\PmServiceNetCoreTestProject\\PmServiceNetCore.Tests.csproj",
+  "projectFilePath": "D:\\Developping\\DotNet\\PmServiceNetCore\\PmServiceNetCoreTestProject\\PmServiceNetCore.Tests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\aaaa\\.nuget\\packages\\azure.core\\1.47.1\\azure.core.1.47.1.nupkg.sha512",
     "C:\\Users\\aaaa\\.nuget\\packages\\azure.identity\\1.14.2\\azure.identity.1.14.2.nupkg.sha512",

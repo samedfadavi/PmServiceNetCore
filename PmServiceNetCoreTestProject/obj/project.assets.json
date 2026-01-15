@@ -3456,11 +3456,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Developping\\DotNet\\PmserviceNetCore\\PmServiceNetCoreTestProject\\PmServiceNetCore.Tests.csproj",
+      "projectUniqueName": "D:\\Developping\\DotNet\\PmServiceNetCore\\PmServiceNetCoreTestProject\\PmServiceNetCore.Tests.csproj",
       "projectName": "PmServiceNetCore.Tests",
-      "projectPath": "D:\\Developping\\DotNet\\PmserviceNetCore\\PmServiceNetCoreTestProject\\PmServiceNetCore.Tests.csproj",
+      "projectPath": "D:\\Developping\\DotNet\\PmServiceNetCore\\PmServiceNetCoreTestProject\\PmServiceNetCore.Tests.csproj",
       "packagesPath": "C:\\Users\\aaaa\\.nuget\\packages\\",
-      "outputPath": "D:\\Developping\\DotNet\\PmserviceNetCore\\PmServiceNetCoreTestProject\\obj\\",
+      "outputPath": "D:\\Developping\\DotNet\\PmServiceNetCore\\PmServiceNetCoreTestProject\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -3483,8 +3483,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\Developping\\DotNet\\PmserviceNetCore\\PmServiceNetCode\\PmServiceNetCode.csproj": {
-              "projectPath": "D:\\Developping\\DotNet\\PmserviceNetCore\\PmServiceNetCode\\PmServiceNetCode.csproj"
+            "D:\\Developping\\DotNet\\PmServiceNetCore\\PmServiceNetCode\\PmServiceNetCode.csproj": {
+              "projectPath": "D:\\Developping\\DotNet\\PmServiceNetCore\\PmServiceNetCode\\PmServiceNetCode.csproj"
             }
           }
         }
