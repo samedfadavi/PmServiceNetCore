@@ -6,16 +6,19 @@ on:
       - master
   workflow_dispatch:
 
+# ✅ OIDC permissions at WORKFLOW level
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
   build:
     runs-on: windows-latest
-    permissions:
-      contents: read
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up .NET Core
+      - name: Set up .NET
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.x'
@@ -29,36 +32,24 @@ jobs:
       - name: Publish
         run: dotnet publish --configuration Release --output ./publish --no-build
 
-      - name: Upload artifact for deployment job
+      - name: Upload artifact for deployment
         uses: actions/upload-artifact@v4
         with:
-          name: .net-app
+          name: dotnet-app
           path: ./publish
-
-      - name: Upload build outputs for test job
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-output
-          path: ./
 
 
   test:
     runs-on: windows-latest
     needs: build
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
 
-      - name: Set up .NET Core
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up .NET
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.x'
-
-      - name: Download build outputs
-        uses: actions/download-artifact@v4
-        with:
-          name: build-output
-          path: ./
 
       - name: Run unit tests
         run: dotnet test --no-build --verbosity normal
@@ -67,27 +58,27 @@ jobs:
   deploy:
     runs-on: windows-latest
     needs: test
-    permissions:
-      id-token: write
-      contents: read
 
     steps:
-      - name: Download artifact from build job
+      - name: Download artifact
         uses: actions/download-artifact@v4
         with:
-          name: .net-app
+          name: dotnet-app
           path: ./publish
 
-      - name: Login to Azure
-        uses: azure/login@v2
+      - name: Azure Login (OIDC)
+        uses: azure/login@v1
         with:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
+      # (Optional but VERY useful for debugging)
+      - name: Verify Azure identity
+        run: az account show
+
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'pmservice-webapi'
-          slot-name: 'Production'
           package: ./publish
