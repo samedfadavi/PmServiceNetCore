@@ -1,4 +1,4 @@
-name: Build, Test, and Deploy ASP.Net Core app to Azure Web App - pmservice-webapi
+name: Test ASP.Net Core app 
 
 on:
   workflow_dispatch:
