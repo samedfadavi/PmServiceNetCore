@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "D:\\Developping\\DotNet\\PmserviceNetCore\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{AF16E535-C3EF-B87B-9662-644D0C9B7940}|PmServiceNetCoreTestProject\\PmServiceNetCore.Tests.csproj|d:\\developping\\dotnet\\pmservicenetcore\\pmservicenetcoretestproject\\integrationtests\\farayandintegrationtests .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AF16E535-C3EF-B87B-9662-644D0C9B7940}|PmServiceNetCoreTestProject\\PmServiceNetCore.Tests.csproj|solutionrelative:pmservicenetcoretestproject\\integrationtests\\farayandintegrationtests .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{AF16E535-C3EF-B87B-9662-644D0C9B7940}|PmServiceNetCoreTestProject\\PmServiceNetCore.Tests.csproj|d:\\developping\\dotnet\\pmservicenetcore\\pmservicenetcoretestproject\\integrationtests\\customwebapplicationfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{AF16E535-C3EF-B87B-9662-644D0C9B7940}|PmServiceNetCoreTestProject\\PmServiceNetCore.Tests.csproj|solutionrelative:pmservicenetcoretestproject\\integrationtests\\customwebapplicationfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF16E535-C3EF-B87B-9662-644D0C9B7940}|PmServiceNetCoreTestProject\\PmServiceNetCore.Tests.csproj|d:\\developping\\dotnet\\pmservicenetcore\\pmservicenetcoretestproject\\integrationtests\\farayandintegrationtests .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF16E535-C3EF-B87B-9662-644D0C9B7940}|PmServiceNetCoreTestProject\\PmServiceNetCore.Tests.csproj|solutionrelative:pmservicenetcoretestproject\\integrationtests\\farayandintegrationtests .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{AF16E535-C3EF-B87B-9662-644D0C9B7940}|PmServiceNetCoreTestProject\\PmServiceNetCore.Tests.csproj|d:\\developping\\dotnet\\pmservicenetcore\\pmservicenetcoretestproject\\appsettings.test.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
@@ -97,7 +97,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -105,13 +105,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "CustomWebApplicationFactory.cs",
               "DocumentMoniker": "D:\\Developping\\DotNet\\PmserviceNetCore\\PmServiceNetCoreTestProject\\IntegrationTests\\CustomWebApplicationFactory.cs",
               "RelativeDocumentMoniker": "PmServiceNetCoreTestProject\\IntegrationTests\\CustomWebApplicationFactory.cs",
               "ToolTip": "D:\\Developping\\DotNet\\PmserviceNetCore\\PmServiceNetCoreTestProject\\IntegrationTests\\CustomWebApplicationFactory.cs",
               "RelativeToolTip": "PmServiceNetCoreTestProject\\IntegrationTests\\CustomWebApplicationFactory.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAA3AAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-17T07:35:16.597Z",
               "EditorCaption": ""
@@ -120,14 +120,13 @@
               "$type": "Document",
               "DocumentIndex": 2,
               "Title": "appsettings.test.json",
-              "DocumentMoniker": "D:\\Developping\\DotNet\\PmServiceNetCore\\PmServiceNetCoreTestProject\\appsettings.test.json",
+              "DocumentMoniker": "D:\\Developping\\DotNet\\PmserviceNetCore\\PmServiceNetCoreTestProject\\appsettings.test.json",
               "RelativeDocumentMoniker": "PmServiceNetCoreTestProject\\appsettings.test.json",
-              "ToolTip": "D:\\Developping\\DotNet\\PmServiceNetCore\\PmServiceNetCoreTestProject\\appsettings.test.json",
+              "ToolTip": "D:\\Developping\\DotNet\\PmserviceNetCore\\PmServiceNetCoreTestProject\\appsettings.test.json",
               "RelativeToolTip": "PmServiceNetCoreTestProject\\appsettings.test.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-01-17T07:33:58.253Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-17T07:33:58.253Z"
             },
             {
               "$type": "Document",
@@ -139,12 +138,11 @@
               "RelativeToolTip": "PmServiceNetCoreTestProject\\appsettings.Development.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-01-17T07:33:53.842Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-17T07:33:53.842Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "FarayandIntegrationTests .cs",
               "DocumentMoniker": "D:\\Developping\\DotNet\\PmserviceNetCore\\PmServiceNetCoreTestProject\\IntegrationTests\\FarayandIntegrationTests .cs",
               "RelativeDocumentMoniker": "PmServiceNetCoreTestProject\\IntegrationTests\\FarayandIntegrationTests .cs",
@@ -152,8 +150,7 @@
               "RelativeToolTip": "PmServiceNetCoreTestProject\\IntegrationTests\\FarayandIntegrationTests .cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAAABQAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-17T02:08:15.795Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-17T02:08:15.795Z"
             },
             {
               "$type": "Document",
@@ -165,12 +162,7 @@
               "RelativeToolTip": "PmServiceNetCode\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-17T04:22:25.54Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{e1b7d1f8-9b3c-49b1-8f4f-bfc63a88835d}"
+              "WhenOpened": "2026-01-17T04:22:25.54Z"
             },
             {
               "$type": "Document",
@@ -182,8 +174,7 @@
               "RelativeToolTip": "PmServiceNetCode\\Controllers\\FarayandController .cs",
               "ViewState": "AgIAAAQAAAAAAAAAAAAgwBIAAAA/AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-16T21:11:39.579Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-16T21:11:39.579Z"
             },
             {
               "$type": "Document",
@@ -207,8 +198,7 @@
               "RelativeToolTip": "PmServiceNetCoreTestProject\\Controllers\\FarayandControllerTests.cs",
               "ViewState": "AgIAAAkAAAAAAAAAAAAAwBwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-16T21:15:24.18Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-16T21:15:24.18Z"
             },
             {
               "$type": "Document",
@@ -220,8 +210,7 @@
               "RelativeToolTip": "PmServiceNetCode\\appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-01-17T06:42:58.523Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-17T06:42:58.523Z"
             },
             {
               "$type": "Document",
@@ -376,6 +365,10 @@
               "ViewState": "AgIAACYAAAAAAAAAAAAAADIAAAA0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-15T04:38:26.377Z"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e1b7d1f8-9b3c-49b1-8f4f-bfc63a88835d}"
             }
           ]
         }

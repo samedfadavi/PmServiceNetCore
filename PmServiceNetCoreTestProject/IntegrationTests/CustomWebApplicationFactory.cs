@@ -14,11 +14,11 @@ namespace PmServiceNetCore.Tests.IntegrationTests
     {
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
-            builder.UseEnvironment("Test");
+            builder.UseContentRoot(Path.Combine(Directory.GetCurrentDirectory(), "..", "PmServiceNetCode"));
 
             builder.ConfigureAppConfiguration((context, config) =>
             {
-                config.AddJsonFile("appsettings.json");
+                config.AddJsonFile("appsettings.json"); // فایل کانفیگ واقعی
             });
         }
     }
