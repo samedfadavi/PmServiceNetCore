@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,22 +10,18 @@ using System.Threading.Tasks;
 
 namespace PmServiceNetCore.Tests.IntegrationTests
 {
-    public class CustomWebApplicationFactory
-        : WebApplicationFactory<Program>
+    public class CustomWebApplicationFactory : WebApplicationFactory<Program>
     {
-        protected override void ConfigureWebHost(Microsoft.AspNetCore.Hosting.IWebHostBuilder builder)
+        protected override IHost CreateHost(IHostBuilder builder)
         {
+            // استفاده از مسیر پیش‌فرض پروژه تست، بدون تغییر ContentRoot
             builder.ConfigureAppConfiguration((context, config) =>
             {
-                // اول remove تمام config های قبلی
-                config.Sources.Clear();
-
-                // اضافه کردن environment-specific یا environment variable
-                config.AddEnvironmentVariables();
-
-                // یا اگر میخوای فایل appsettings مخصوص تست داشته باشی:
-                config.AddJsonFile("appsettings.Test.json", optional: true);
+                // بارگذاری appsettings.json پروژه تست
+                config.AddJsonFile("appsettings.json", optional: true);
             });
+
+            return base.CreateHost(builder);
         }
     }
 }
