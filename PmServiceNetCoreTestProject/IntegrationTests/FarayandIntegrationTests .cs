@@ -10,13 +10,13 @@ using System.Net.Http.Json;
 
 namespace PmServiceNetCore.Tests.IntegrationTests
 {
-    public class FarayandIntegrationTests : IClassFixture<WebApplicationFactory<Program>>
+    public class FarayandIntegrationTests
+        : IClassFixture<CustomWebApplicationFactory>
     {
         private readonly HttpClient _client;
 
-        public FarayandIntegrationTests(WebApplicationFactory<Program> factory)
+        public FarayandIntegrationTests(CustomWebApplicationFactory factory)
         {
-            // فقط API را صدا می‌زنیم، هیچ کاری با DbContext در این تست نداریم
             _client = factory.CreateClient();
         }
 

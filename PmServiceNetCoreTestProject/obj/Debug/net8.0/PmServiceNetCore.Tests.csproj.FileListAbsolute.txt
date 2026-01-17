@@ -846,3 +846,4 @@ D:\Developping\DotNet\PmServiceNetCore\PmServiceNetCoreTestProject\obj\Debug\net
 D:\Developping\DotNet\PmServiceNetCore\PmServiceNetCoreTestProject\obj\Debug\net8.0\PmServiceNetCore.Tests.pdb
 D:\Developping\DotNet\PmServiceNetCore\PmServiceNetCoreTestProject\obj\Debug\net8.0\PmServiceNetCore.Tests.genruntimeconfig.cache
 D:\Developping\DotNet\PmServiceNetCore\PmServiceNetCoreTestProject\obj\Debug\net8.0\ref\PmServiceNetCore.Tests.dll
+D:\Developping\DotNet\PmServiceNetCore\PmServiceNetCoreTestProject\bin\Debug\net8.0\appsettings.test.json
