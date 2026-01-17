@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using PmServiceNetCode.Models;
 
 namespace pmService.Models
 {
@@ -9,6 +10,7 @@ namespace pmService.Models
         {
         }
 
+        public DbSet<TblFarayand> TblFarayand { get; set; }
         public virtual DbSet<tbl_Catout> tbl_Catout { get; set; }
         public virtual DbSet<tbl_FFM> tbl_FFM { get; set; }
         public virtual DbSet<tbl_Omoor> tbl_Omoor { get; set; }
