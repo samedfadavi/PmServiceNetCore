@@ -39,12 +39,25 @@ jobs:
           path: ./publish
 
 
+  test:
+    runs-on: windows-latest
+    needs: build
 
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.x'
+
+      - name: Run unit tests
+        run: dotnet test --no-build --verbosity normal
 
 
   deploy:
     runs-on: windows-latest
-    needs: build
+    needs: test
 
     steps:
       - name: Download artifact
@@ -69,4 +82,5 @@ jobs:
         with:
           app-name: 'pmservice-webapi'
           package: ./publish
+
 
