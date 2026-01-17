@@ -1,4 +1,3 @@
-
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using pmService.Models;
@@ -7,32 +6,39 @@ using PmServiceNetCode.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Add services to the container
 builder.Services.AddScoped<ISqlDataAccess, ClassData>();
 builder.Services.AddScoped<IProcedureDataAccess, ClassData>();
 builder.Services.AddScoped<IFarayandRepository, FarayandRepository>();
+
+// DbContext for real SQL Server
 builder.Services.AddDbContext<MaznetModel>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Maznet_Azure")));
+
 builder.Services.AddControllers();
-builder.Services.AddScoped<ClassData>();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+// Swagger / OpenAPI
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// Add ClassData as scoped (already registered via interfaces, optional)
+builder.Services.AddScoped<ClassData>();
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Development pipeline
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseDeveloperExceptionPage();
 }
 
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
-
 app.MapControllers();
 
 app.Run();
+
+// Needed for WebApplicationFactory in integration tests
 public partial class Program { }

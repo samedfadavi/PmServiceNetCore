@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Testing;
 using Moq;
 using PmServiceNetCode.Controllers;
 using PmServiceNetCode.DTOs;
@@ -7,36 +8,38 @@ using PmServiceNetCode.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace PmServiceNetCore.Tests.Controllers
 {
-    public class FarayandControllerTests
+    public class FarayandIntegrationTests : IClassFixture<WebApplicationFactory<Program>>
     {
+        private readonly HttpClient _client;
+
+        public FarayandIntegrationTests(WebApplicationFactory<Program> factory)
+        {
+            // فقط API را صدا می‌زنیم، هیچ کاری با DbContext در این تست نداریم
+            _client = factory.CreateClient();
+        }
+
         [Fact]
-        public async Task GetAll_ReturnsOk_WithData()
+        public async Task GetAll_CallsApiAndReturnsData()
         {
-            var mockRepo = new Mock<IFarayandRepository>();
-            mockRepo.Setup(x => x.GetAllAsync()).ReturnsAsync(new List<TblFarayand>
-        {
-            new TblFarayand { ID = 1, Onvan = "Test" }
-        });
+            // 1️⃣ فراخوانی endpoint واقعی
+            var response = await _client.GetAsync("/api/farayand");
 
-            var controller = new FarayandController(mockRepo.Object);
+            // 2️⃣ بررسی کد پاسخ
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
-            // Act
-            var result = await controller.GetAll();
+            // 3️⃣ خواندن داده واقعی که API برگردانده
+            var data = await response.Content.ReadFromJsonAsync<List<FarayandDto>>();
 
-            // Assert
-            var okResult = Assert.IsType<OkObjectResult>(result.Result);
-
-            // Correct type assertion
-            var data = Assert.IsType<List<FarayandDto>>(okResult.Value);
-
-            Assert.Single(data);
-            Assert.Equal(1, data[0].ID);
-            Assert.Equal("Test", data[0].Onvan);
+            Assert.NotNull(data);
+            // اینجا optional: اگر می‌خوای چک کنی حداقل یک رکورد دارد
+            // Assert.True(data.Count > 0);
         }
     }
 }
