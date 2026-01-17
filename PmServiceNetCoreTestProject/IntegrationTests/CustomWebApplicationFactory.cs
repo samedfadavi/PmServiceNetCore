@@ -12,13 +12,15 @@ namespace PmServiceNetCore.Tests.IntegrationTests
     public class CustomWebApplicationFactory
         : WebApplicationFactory<Program>
     {
-        protected override void ConfigureWebHost(IWebHostBuilder builder)
+        protected override void ConfigureWebHost(Microsoft.AspNetCore.Hosting.IWebHostBuilder builder)
         {
+            // مشخص کردن مسیر پروژه API واقعی
             builder.UseContentRoot(Path.Combine(Directory.GetCurrentDirectory(), "..", "PmServiceNetCode"));
 
             builder.ConfigureAppConfiguration((context, config) =>
             {
-                config.AddJsonFile("appsettings.json"); // فایل کانفیگ واقعی
+                // بارگذاری فایل appsettings.json واقعی
+                config.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
             });
         }
     }
