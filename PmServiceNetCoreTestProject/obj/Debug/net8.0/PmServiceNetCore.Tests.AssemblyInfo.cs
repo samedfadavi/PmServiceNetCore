@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PmServiceNetCore.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+df19391724e6a1927dc12ed631422337cf8c9813")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4c6becd64fbb61271e83940fa848494073c9a66e")]
 [assembly: System.Reflection.AssemblyProductAttribute("PmServiceNetCore.Tests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PmServiceNetCore.Tests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

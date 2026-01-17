@@ -14,13 +14,16 @@ namespace PmServiceNetCore.Tests.IntegrationTests
     {
         protected override void ConfigureWebHost(Microsoft.AspNetCore.Hosting.IWebHostBuilder builder)
         {
-            // مشخص کردن مسیر پروژه API واقعی
-            builder.UseContentRoot(Path.Combine(Directory.GetCurrentDirectory(), "..", "PmServiceNetCode"));
-
             builder.ConfigureAppConfiguration((context, config) =>
             {
-                // بارگذاری فایل appsettings.json واقعی
-                config.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+                // اول remove تمام config های قبلی
+                config.Sources.Clear();
+
+                // اضافه کردن environment-specific یا environment variable
+                config.AddEnvironmentVariables();
+
+                // یا اگر میخوای فایل appsettings مخصوص تست داشته باشی:
+                config.AddJsonFile("appsettings.Test.json", optional: true);
             });
         }
     }
