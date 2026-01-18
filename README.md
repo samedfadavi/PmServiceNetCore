@@ -1,6 +1,9 @@
 # Project Name
 
 Dima Asset Management Web Application
+<p align="center">
+  <img src="assets/images/dima1page.jpg" width="800" />
+</p>
 <!--
 ## 🚀 Live Demo
 👉 https://your-deployed-url-here
