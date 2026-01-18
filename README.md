@@ -2,7 +2,7 @@
 
 Dima Asset Management Web Application
 <p align="center">
-  <img src="assets/images/dima1page.jpg" width="800" />
+  <img src="asseets/images/dima1page.jpg" width="800" />
 </p>
 <!--
 ## 🚀 Live Demo
