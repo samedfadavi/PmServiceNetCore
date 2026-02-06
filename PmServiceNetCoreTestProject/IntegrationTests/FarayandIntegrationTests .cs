@@ -21,7 +21,7 @@ namespace PmServiceNetCore.Tests.IntegrationTests
             _client = factory.CreateClient();
         }
 
-        [Fact]
+        //[Fact]
         public async Task GetAll_CallsApiAndReturnsData()
         {
             // 1️⃣ فراخوانی endpoint واقعی

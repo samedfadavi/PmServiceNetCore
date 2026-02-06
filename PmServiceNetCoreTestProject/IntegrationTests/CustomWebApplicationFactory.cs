@@ -13,6 +13,7 @@ public class CustomWebApplicationFactory
 
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
+        builder.UseContentRoot(Directory.GetCurrentDirectory());
         builder.ConfigureServices(services =>
         {
             // DbContext اصلی رو حذف می‌کنیم
