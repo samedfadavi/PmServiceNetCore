@@ -15,31 +15,31 @@ using System.Threading.Tasks;
 
 namespace PmServiceNetCore.Tests.Controllers
 {
-    public class FarayandIntegrationTests : IClassFixture<WebApplicationFactory<Program>>
+    public class FarayandControllerTests
     {
-        private readonly HttpClient _client;
-
-        public FarayandIntegrationTests(WebApplicationFactory<Program> factory)
-        {
-            // فقط API را صدا می‌زنیم، هیچ کاری با DbContext در این تست نداریم
-            _client = factory.CreateClient();
-        }
-
         [Fact]
-        public async Task GetAll_CallsApiAndReturnsData()
+        public async Task GetAll_ReturnsOk_WithData()
         {
-            // 1️⃣ فراخوانی endpoint واقعی
-            var response = await _client.GetAsync("/api/farayand");
+            var mockRepo = new Mock<IFarayandRepository>();
+            mockRepo.Setup(x => x.GetAllAsync()).ReturnsAsync(new List<TblFarayand>
+        {
+            new TblFarayand { ID = 1, Onvan = "Test" }
+        });
 
-            // 2️⃣ بررسی کد پاسخ
-            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            var controller = new FarayandController(mockRepo.Object);
 
-            // 3️⃣ خواندن داده واقعی که API برگردانده
-            var data = await response.Content.ReadFromJsonAsync<List<FarayandDto>>();
+            // Act
+            var result = await controller.GetAll();
 
-            Assert.NotNull(data);
-            // اینجا optional: اگر می‌خوای چک کنی حداقل یک رکورد دارد
-            // Assert.True(data.Count > 0);
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result.Result);
+
+            // Correct type assertion
+            var data = Assert.IsType<List<FarayandDto>>(okResult.Value);
+
+            Assert.Single(data);
+            Assert.Equal(1, data[0].ID);
+            Assert.Equal("Test", data[0].Onvan);
         }
     }
 }

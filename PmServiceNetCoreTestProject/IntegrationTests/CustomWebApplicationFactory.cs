@@ -1,27 +1,47 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
+using Microsoft.Data.Sqlite;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using pmService.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace PmServiceNetCore.Tests.IntegrationTests
+public class CustomWebApplicationFactory
+    : WebApplicationFactory<Program>
 {
-    public class CustomWebApplicationFactory : WebApplicationFactory<Program>
+    private SqliteConnection _connection = null!;
+
+    protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
-        protected override IHost CreateHost(IHostBuilder builder)
+        builder.ConfigureServices(services =>
         {
-            // استفاده از مسیر پیش‌فرض پروژه تست، بدون تغییر ContentRoot
-            builder.ConfigureAppConfiguration((context, config) =>
+            // DbContext اصلی رو حذف می‌کنیم
+            var descriptor = services.SingleOrDefault(
+                d => d.ServiceType == typeof(DbContextOptions<MaznetModel>));
+
+            if (descriptor != null)
+                services.Remove(descriptor);
+
+            // SQLite in-memory
+            _connection = new SqliteConnection("DataSource=:memory:");
+            _connection.Open();
+
+            services.AddDbContext<MaznetModel>(options =>
             {
-                // بارگذاری appsettings.json پروژه تست
-                config.AddJsonFile("appsettings.json", optional: true);
+                options.UseSqlite(_connection);
             });
 
-            return base.CreateHost(builder);
-        }
+            // ساخت Schema
+            var sp = services.BuildServiceProvider();
+            using var scope = sp.CreateScope();
+            var db = scope.ServiceProvider.GetRequiredService<MaznetModel>();
+            db.Database.EnsureCreated();
+        });
+    }
+
+    protected override void Dispose(bool disposing)
+    {
+        base.Dispose(disposing);
+        _connection?.Dispose();
     }
 }

@@ -3,13 +3,19 @@ using Microsoft.EntityFrameworkCore;
 using pmService.Models;
 using PmServiceNetCode.Interfaces;
 using PmServiceNetCode.Repositories;
-
+using PmServiceNetCode.Services;
+using PmServiceNetCode.Validation;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container
 builder.Services.AddScoped<ISqlDataAccess, ClassData>();
 builder.Services.AddScoped<IProcedureDataAccess, ClassData>();
 builder.Services.AddScoped<IFarayandRepository, FarayandRepository>();
+builder.Services.AddScoped<IFormRepository, FormRepository>();
+builder.Services.AddScoped<IFormService, FormService>();
+builder.Services.AddValidatorsFromAssemblyContaining<CreateFormDtoValidator>();
 
 // DbContext for real SQL Server
 builder.Services.AddDbContext<MaznetModel>(options =>

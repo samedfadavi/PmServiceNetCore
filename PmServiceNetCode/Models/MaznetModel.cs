@@ -23,11 +23,27 @@ namespace pmService.Models
         public virtual DbSet<tbl_Tablo> tbl_Tablo { get; set; }
         public virtual DbSet<tbl_Trance> tbl_Trance { get; set; }
         public virtual DbSet<Tbl_Derakht_Tajhizat> Tbl_Derakht_Tajhizat { get; set; }
-
+          public DbSet<Form> Forms => Set<Form>();
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Form>(entity =>
+            {
+                entity.HasQueryFilter(e => !e.IsDeleted);
+                entity.ToTable("Tbl_Forms");
 
+                entity.HasKey(e => e.IdForm);
+
+                entity.Property(e => e.IdForm)
+                      .HasColumnName("ID_Form")
+                      .ValueGeneratedOnAdd();
+
+                entity.Property(e => e.Onvan)
+                      .HasMaxLength(500);
+
+                entity.Property(e => e.Description)
+                      .HasMaxLength(500);
+            });
             modelBuilder.Entity<tbl_FFM>(entity =>
             {
                 entity.Property(e => e.Havaee_FFM)
