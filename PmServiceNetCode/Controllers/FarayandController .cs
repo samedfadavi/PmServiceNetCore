@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PmServiceNetCode.DTOs;
 using PmServiceNetCode.Interfaces;
 
 namespace PmServiceNetCode.Controllers
 {
     [ApiController]
+    [Authorize]
     [Route("api/[controller]")]
     public class FarayandController : ControllerBase
     {
