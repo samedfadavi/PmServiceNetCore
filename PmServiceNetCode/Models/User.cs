@@ -1,5 +1,4 @@
-﻿namespace PmServiceNetCode.Models
-{
+﻿
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
@@ -28,6 +27,8 @@
             public int? Flag_N { get; set; }
 
             public int? code_Role { get; set; }
+            public ICollection<UserRole> UserRoles { get; set; }
+    = new List<UserRole>();
         }
     }
-}
+

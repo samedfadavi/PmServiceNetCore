@@ -1,17 +1,20 @@
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Infrastructure.Data;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using pmService.Models;
+using PmServiceNetCode.Authorization;
+using PmServiceNetCode.Data;
 using PmServiceNetCode.Interfaces;
+using PmServiceNetCode.Models;
 using PmServiceNetCode.Repositories;
 using PmServiceNetCode.Services;
 using PmServiceNetCode.Validation;
-using FluentValidation;
-using FluentValidation.AspNetCore;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using Microsoft.AspNetCore.Identity;
-using PmServiceNetCode.Models.PmServiceNetCode.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container
@@ -21,7 +24,8 @@ builder.Services.AddScoped<IFarayandRepository, FarayandRepository>();
 builder.Services.AddScoped<IFormRepository, FormRepository>();
 builder.Services.AddScoped<IFormService, FormService>();
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
-
+builder.Services.AddScoped<IAuthorizationHandler, PermissionAuthorizationHandler>();
+builder.Services.AddSingleton<IAuthorizationPolicyProvider, PermissionPolicyProvider>();
 builder.Services.AddValidatorsFromAssemblyContaining<CreateFormDtoValidator>();
 
 // DbContext for real SQL Server
@@ -83,7 +87,12 @@ builder.Services.AddSwaggerGen(options =>
 builder.Services.AddScoped<ClassData>();
 
 var app = builder.Build();
+//using (var scope = app.Services.CreateScope())
+//{
+//    var context = scope.ServiceProvider.GetRequiredService<MaznetModel>();
 
+//    await DbSeeder.SeedAsync(context);
+//}
 // Development pipeline
 if (app.Environment.IsDevelopment())
 {

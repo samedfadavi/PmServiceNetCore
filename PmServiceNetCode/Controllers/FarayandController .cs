@@ -16,7 +16,7 @@ namespace PmServiceNetCode.Controllers
         {
             _repository = repository;
         }
-
+        [Authorize(Policy = "Permission:Farayand.Read")]
         [HttpGet]
         public async Task<ActionResult<List<FarayandDto>>> GetAll()
         {
