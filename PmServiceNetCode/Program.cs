@@ -94,10 +94,11 @@ var app = builder.Build();
 //    await DbSeeder.SeedAsync(context);
 //}
 // Development pipeline
+app.UseSwagger();
+app.UseSwaggerUI();
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+  
     app.UseDeveloperExceptionPage();
 }
 
