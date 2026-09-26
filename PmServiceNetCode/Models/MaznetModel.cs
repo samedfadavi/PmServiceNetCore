@@ -29,10 +29,36 @@ namespace pmService.Models
         public DbSet<Permission> Permissions { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
         public DbSet<RolePermission> RolePermissions { get; set; }
+        public DbSet<PmServiceNetCode.Models.Endpoint> Endpoints { get; set; }
+        public DbSet<EndpointPermission> EndpointPermissions { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Role>()
+        .ToTable("Roles");
+
+            modelBuilder.Entity<Permission>()
+                .ToTable("Permissions");
+
+            modelBuilder.Entity<UserRole>()
+                .ToTable("UserRoles");
+
+            modelBuilder.Entity<RolePermission>()
+                .ToTable("RolePermissions");
+
+            modelBuilder.Entity<EndpointPermission>()
+    .HasKey(x => new { x.EndpointId, x.PermissionId });
+
+            modelBuilder.Entity<EndpointPermission>()
+                .HasOne(x => x.Endpoint)
+                .WithMany(x => x.EndpointPermissions)
+                .HasForeignKey(x => x.EndpointId);
+
+            modelBuilder.Entity<EndpointPermission>()
+                .HasOne(x => x.Permission)
+                .WithMany()
+                .HasForeignKey(x => x.PermissionId);
             modelBuilder.Entity<UserRole>()
     .HasKey(x => new { x.UserId, x.RoleId });
 
