@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using PmServiceNetCode.Models;
 
+
 namespace pmService.Models
 {
     public partial class MaznetModel : DbContext
@@ -9,7 +10,7 @@ namespace pmService.Models
             : base(options)
         {
         }
-
+        public DbSet<User> Users { get; set; }
         public DbSet<TblFarayand> TblFarayand { get; set; }
         public virtual DbSet<tbl_Catout> tbl_Catout { get; set; }
         public virtual DbSet<tbl_FFM> tbl_FFM { get; set; }
@@ -24,9 +25,65 @@ namespace pmService.Models
         public virtual DbSet<tbl_Trance> tbl_Trance { get; set; }
         public virtual DbSet<Tbl_Derakht_Tajhizat> Tbl_Derakht_Tajhizat { get; set; }
           public DbSet<Form> Forms => Set<Form>();
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<Permission> Permissions { get; set; }
+        public DbSet<UserRole> UserRoles { get; set; }
+        public DbSet<RolePermission> RolePermissions { get; set; }
+        public DbSet<PmServiceNetCode.Models.Endpoint> Endpoints { get; set; }
+        public DbSet<EndpointPermission> EndpointPermissions { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Role>()
+        .ToTable("Roles");
+
+            modelBuilder.Entity<Permission>()
+                .ToTable("Permissions");
+
+            modelBuilder.Entity<UserRole>()
+                .ToTable("UserRoles");
+
+            modelBuilder.Entity<RolePermission>()
+                .ToTable("RolePermissions");
+
+            modelBuilder.Entity<EndpointPermission>()
+    .HasKey(x => new { x.EndpointId, x.PermissionId });
+
+            modelBuilder.Entity<EndpointPermission>()
+                .HasOne(x => x.Endpoint)
+                .WithMany(x => x.EndpointPermissions)
+                .HasForeignKey(x => x.EndpointId);
+
+            modelBuilder.Entity<EndpointPermission>()
+                .HasOne(x => x.Permission)
+                .WithMany()
+                .HasForeignKey(x => x.PermissionId);
+            modelBuilder.Entity<UserRole>()
+    .HasKey(x => new { x.UserId, x.RoleId });
+
+            modelBuilder.Entity<UserRole>()
+                .HasOne(x => x.User)
+                .WithMany(x => x.UserRoles)
+                .HasForeignKey(x => x.UserId);
+
+            modelBuilder.Entity<UserRole>()
+                .HasOne(x => x.Role)
+                .WithMany(x => x.UserRoles)
+                .HasForeignKey(x => x.RoleId);
+
+            modelBuilder.Entity<RolePermission>()
+                .HasKey(x => new { x.RoleId, x.PermissionId });
+
+            modelBuilder.Entity<RolePermission>()
+                .HasOne(x => x.Role)
+                .WithMany(x => x.RolePermissions)
+                .HasForeignKey(x => x.RoleId);
+
+            modelBuilder.Entity<RolePermission>()
+                .HasOne(x => x.Permission)
+                .WithMany(x => x.RolePermissions)
+                .HasForeignKey(x => x.PermissionId);
             modelBuilder.Entity<Form>(entity =>
             {
                 entity.HasQueryFilter(e => !e.IsDeleted);

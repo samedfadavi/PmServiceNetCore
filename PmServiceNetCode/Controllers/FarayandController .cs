@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PmServiceNetCode.DTOs;
 using PmServiceNetCode.Interfaces;
 
 namespace PmServiceNetCode.Controllers
 {
     [ApiController]
+    [Authorize]
     [Route("api/[controller]")]
     public class FarayandController : ControllerBase
     {
@@ -14,7 +16,7 @@ namespace PmServiceNetCode.Controllers
         {
             _repository = repository;
         }
-
+        [Authorize(Policy = "Permission:Farayand.Read")]
         [HttpGet]
         public async Task<ActionResult<List<FarayandDto>>> GetAll()
         {
