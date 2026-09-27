@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Asp.Versioning;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PmServiceNetCode.DTOs;
 using PmServiceNetCode.Interfaces;
@@ -7,7 +8,9 @@ namespace PmServiceNetCode.Controllers
 {
     [ApiController]
     [Authorize]
-    [Route("api/[controller]")]
+    [ApiVersion(1.0)]
+    [Route("api/v{version:apiVersion}/[controller]")]
+   
     public class FarayandController : ControllerBase
     {
         private readonly IFarayandRepository _repository;
