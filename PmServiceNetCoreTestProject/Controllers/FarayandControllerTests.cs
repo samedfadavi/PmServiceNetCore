@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Testing;
 using Moq;
 using PmServiceNetCode.Controllers;
+using PmServiceNetCode.Controllers.V1;
 using PmServiceNetCode.DTOs;
 using PmServiceNetCode.Interfaces;
 using PmServiceNetCode.Models;
@@ -28,13 +29,11 @@ namespace PmServiceNetCore.Tests.Controllers
 
             var controller = new FarayandController(mockRepo.Object);
 
-            // Act
             var result = await controller.GetAll();
 
-            // Assert
             var okResult = Assert.IsType<OkObjectResult>(result.Result);
 
-            // Correct type assertion
+           
             var data = Assert.IsType<List<FarayandDto>>(okResult.Value);
 
             Assert.Single(data);
