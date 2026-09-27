@@ -15,6 +15,7 @@ using PmServiceNetCode.Repositories;
 using PmServiceNetCode.Services;
 using PmServiceNetCode.Validation;
 using System.Text;
+using Asp.Versioning;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container
@@ -27,7 +28,18 @@ builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 builder.Services.AddScoped<IAuthorizationHandler, PermissionAuthorizationHandler>();
 builder.Services.AddSingleton<IAuthorizationPolicyProvider, PermissionPolicyProvider>();
 builder.Services.AddValidatorsFromAssemblyContaining<CreateFormDtoValidator>();
-
+builder.Services.AddApiVersioning(options =>
+{
+    options.DefaultApiVersion = new ApiVersion(1, 0);
+    options.AssumeDefaultVersionWhenUnspecified = true;
+    options.ReportApiVersions = true;
+})
+.AddMvc()
+.AddApiExplorer(options =>
+{
+    options.GroupNameFormat = "'v'VVV";
+    options.SubstituteApiVersionInUrl = true;
+});
 // DbContext for real SQL Server
 builder.Services.AddDbContext<MaznetModel>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Maznet_Azure")));
@@ -66,7 +78,7 @@ builder.Services.AddSwaggerGen(options =>
         In = Microsoft.OpenApi.Models.ParameterLocation.Header,
         Description = "Enter your JWT token."
     });
-
+    
     options.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement
     {
         {
@@ -80,6 +92,11 @@ builder.Services.AddSwaggerGen(options =>
             },
             Array.Empty<string>()
         }
+    });
+    options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+    {
+        Title = "PmService API",
+        Version = "v1"
     });
 });
 
@@ -95,7 +112,12 @@ var app = builder.Build();
 //}
 // Development pipeline
 app.UseSwagger();
-app.UseSwaggerUI();
+app.UseSwaggerUI(options =>
+{
+    options.SwaggerEndpoint(
+        "/swagger/v1/swagger.json",
+        "PmService API v1");
+});
 if (app.Environment.IsDevelopment())
 {
   
