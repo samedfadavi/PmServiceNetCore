@@ -27,6 +27,9 @@ builder.Services.AddScoped<IFormService, FormService>();
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 builder.Services.AddScoped<IAuthorizationHandler, PermissionAuthorizationHandler>();
 builder.Services.AddSingleton<IAuthorizationPolicyProvider, PermissionPolicyProvider>();
+
+builder.Services.AddScoped<IAuthorizationHandler, PermissionAuthorizationHandler>();
+builder.Services.AddScoped<IAuthorizationHandler, EndpointPermissionAuthorizationHandler>();
 builder.Services.AddValidatorsFromAssemblyContaining<CreateFormDtoValidator>();
 builder.Services.AddApiVersioning(options =>
 {
@@ -62,6 +65,13 @@ builder.Services
         };
     }
     );
+builder.Services.AddAuthorization(options =>
+{
+    options.FallbackPolicy = new AuthorizationPolicyBuilder()
+        .RequireAuthenticatedUser()
+        .AddRequirements(new EndpointPermissionRequirement())
+        .Build();
+});
 
 builder.Services.AddControllers();
 
@@ -98,6 +108,16 @@ builder.Services.AddSwaggerGen(options =>
         Title = "PmService API",
         Version = "v1"
     });
+    options.SwaggerDoc("v2", new Microsoft.OpenApi.Models.OpenApiInfo
+    {
+        Title = "PmService API",
+        Version = "v2"
+    });
+
+    options.DocInclusionPredicate((documentName, apiDescription) =>
+    {
+        return apiDescription.GroupName == documentName;
+    });
 });
 
 // Add ClassData as scoped (already registered via interfaces, optional)
@@ -117,6 +137,9 @@ app.UseSwaggerUI(options =>
     options.SwaggerEndpoint(
         "/swagger/v1/swagger.json",
         "PmService API v1");
+    options.SwaggerEndpoint(
+    "/swagger/v2/swagger.json",
+    "PmService API v2");
 });
 if (app.Environment.IsDevelopment())
 {

@@ -1,0 +1,40 @@
+﻿using Asp.Versioning;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using PmServiceNetCode.DTOs;
+using PmServiceNetCode.Interfaces;
+namespace PmServiceNetCode.Controllers.V1;
+[ApiController]
+[Authorize]
+[ApiVersion(1.0)]
+[Route("api/v{version:apiVersion}/[controller]")]
+
+
+public class FarayandController : ControllerBase
+{
+    private readonly IFarayandRepository _repository;
+
+    public FarayandController(IFarayandRepository repository)
+    {
+        _repository = repository;
+    }
+
+    [Authorize(Policy = "Permission:Farayand.Read")]
+    [HttpGet]
+    public async Task<ActionResult<List<FarayandDto>>> GetAll()
+    {
+        var data = await _repository.GetAllAsync();
+
+        var result = data.Select(x => new FarayandDto
+        {
+            ID = x.ID,
+            Onvan = x.Onvan,
+            Grouh = x.Grouh,
+            NameSabtKonande = x.NameSabtKonande,
+            TarikhSabt = x.TarikhSabt,
+            FilePath = x.FilePath
+        }).ToList();
+
+        return Ok(result);
+    }
+}
