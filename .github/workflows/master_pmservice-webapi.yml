@@ -39,20 +39,24 @@ jobs:
           path: ./publish
 
 
-  test:
-    runs-on: windows-latest
-    needs: build
+test:
+  runs-on: windows-latest
+  needs: build
 
-    steps:
-      - uses: actions/checkout@v4
+  steps:
+    - uses: actions/checkout@v4
 
-      - name: Set up .NET
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: '8.x'
+    - name: Set up .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.x'
 
-      - name: Run unit tests
-        run: dotnet test --no-build --verbosity normal
+    - name: Run tests
+      env:
+        Jwt__Key: test-secret-key-for-integration-tests-123456789
+        Jwt__Issuer: TestIssuer
+        Jwt__Audience: TestAudience
+      run: dotnet test --configuration Release --verbosity normal
 
 
   deploy:
