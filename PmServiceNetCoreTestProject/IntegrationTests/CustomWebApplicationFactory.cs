@@ -14,6 +14,9 @@ public class CustomWebApplicationFactory
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
         builder.UseContentRoot(Directory.GetCurrentDirectory());
+        builder.UseSetting("Jwt:Key", "test-secret-key-for-integration-tests-123456789");
+        builder.UseSetting("Jwt:Issuer", "TestIssuer");
+        builder.UseSetting("Jwt:Audience", "TestAudience");
         builder.ConfigureServices(services =>
         {
             // DbContext اصلی رو حذف می‌کنیم
