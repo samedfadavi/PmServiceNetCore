@@ -1,4 +1,4 @@
-name: Build, Test, and Deploy ASP.Net Core app to Azure Web App - pmservice-webapi
+name: Build, Test, and Deploy ASP.NET Core app to Azure Web App - pmservice-webapi
 
 on:
   push:
@@ -6,7 +6,6 @@ on:
       - master
   workflow_dispatch:
 
-# ✅ OIDC permissions at WORKFLOW level
 permissions:
   id-token: write
   contents: read
@@ -21,7 +20,7 @@ jobs:
       - name: Set up .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '8.x'
+          dotnet-version: "8.x"
 
       - name: Restore dependencies
         run: dotnet restore
@@ -37,25 +36,25 @@ jobs:
         with:
           name: dotnet-app
           path: ./publish
-    test:
-          runs-on: windows-latest
-          needs: build
 
-          steps:
-          - uses: actions/checkout@v4
+  test:
+    runs-on: windows-latest
+    needs: build
 
-          - name: Set up .NET
-            uses: actions/setup-dotnet@v4
-            with:
-            dotnet-version: '8.x'
+    steps:
+      - uses: actions/checkout@v4
 
-          - name: Run tests
-      env:
-        Jwt__Key: test-secret-key-for-integration-tests-123456789
-        Jwt__Issuer: TestIssuer
-        Jwt__Audience: TestAudience
-      run: dotnet test --configuration Release --verbosity normal
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.x"
 
+      - name: Run tests
+        env:
+          Jwt__Key: test-secret-key-for-integration-tests-123456789
+          Jwt__Issuer: TestIssuer
+          Jwt__Audience: TestAudience
+        run: dotnet test --configuration Release --verbosity normal
 
   deploy:
     runs-on: windows-latest
@@ -75,14 +74,11 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-      # (Optional but VERY useful for debugging)
       - name: Verify Azure identity
         run: az account show
 
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'assetmanaement-api'
+          app-name: "assetmanaement-api"
           package: ./publish
-
-
