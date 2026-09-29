@@ -37,8 +37,6 @@ jobs:
         with:
           name: dotnet-app
           path: ./publish
-
-
 test:
   runs-on: windows-latest
   needs: build
