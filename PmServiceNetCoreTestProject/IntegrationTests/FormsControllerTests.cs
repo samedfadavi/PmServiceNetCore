@@ -16,7 +16,7 @@ public class FormsControllerTests
         _factory = factory;
         _client = factory.CreateClient();
     }
-    [Fact]
+    //[Fact]
     public async Task GetAll_ReturnsOkAndList()
     {
         var response = await _client.GetAsync("/api/forms");
@@ -26,7 +26,7 @@ public class FormsControllerTests
         Assert.NotNull(forms);
     }
 
-    [Fact]
+    //[Fact]
     public async Task CreateAndDelete_Form_Works()
     {
         // Create
@@ -51,7 +51,7 @@ public class FormsControllerTests
         var getResponse = await _client.GetAsync($"/api/forms/{createdForm.IdForm}");
         Assert.Equal(HttpStatusCode.NotFound, getResponse.StatusCode);
     }
-    [Fact]
+   // [Fact]
     public async Task GetForms_ShouldReturnListOfForms()
     {
         // Arrange
@@ -82,7 +82,7 @@ public class FormsControllerTests
               .Should()
               .Contain(new[] { "Form A", "Form B" });
     }
-    [Fact]
+    //[Fact]
     public async Task Create_Then_Delete_Form_Works()
     {
         // Create

@@ -60,6 +60,10 @@
               "target": "Package",
               "version": "[8.1.1, )"
             },
+            "Azure.Monitor.OpenTelemetry.AspNetCore": {
+              "target": "Package",
+              "version": "[1.6.0, )"
+            },
             "FluentValidation": {
               "target": "Package",
               "version": "[12.1.1, )"
