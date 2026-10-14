@@ -1,3 +1,5 @@
+using Asp.Versioning;
+using Azure.Monitor.OpenTelemetry.AspNetCore;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Infrastructure.Data;
@@ -7,20 +9,30 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using pmService.Models;
+using pmService.Repositories;
 using PmServiceNetCode.Authorization;
 using PmServiceNetCode.Data;
 using PmServiceNetCode.Interfaces;
+using PmServiceNetCode.Middleware;
 using PmServiceNetCode.Models;
 using PmServiceNetCode.Repositories;
 using PmServiceNetCode.Services;
 using PmServiceNetCode.Validation;
 using System.Text;
-using Asp.Versioning;
 var builder = WebApplication.CreateBuilder(args);
+
+
+builder.Services.AddOpenTelemetry().UseAzureMonitor();
+
+builder.Services.Configure<OpenTelemetry.Logs.OpenTelemetryLoggerOptions>(options =>
+{
+    options.IncludeScopes = true;
+});
 
 // Add services to the container
 builder.Services.AddScoped<ISqlDataAccess, ClassData>();
 builder.Services.AddScoped<IProcedureDataAccess, ClassData>();
+builder.Services.AddScoped<IDerakhtTajhizatRepository, DerakhtTajhizatRepository>();
 builder.Services.AddScoped<IFarayandRepository, FarayandRepository>();
 builder.Services.AddScoped<IFormRepository, FormRepository>();
 builder.Services.AddScoped<IFormService, FormService>();
@@ -46,7 +58,14 @@ builder.Services.AddApiVersioning(options =>
 // DbContext for real SQL Server
 builder.Services.AddDbContext<MaznetModel>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Maznet_Azure")));
+var jwtKey = builder.Configuration["Jwt:Key"]
+    ?? throw new InvalidOperationException("JWT Key is not configured.");
 
+var jwtIssuer = builder.Configuration["Jwt:Issuer"]
+    ?? throw new InvalidOperationException("JWT Issuer is not configured.");
+
+var jwtAudience = builder.Configuration["Jwt:Audience"]
+    ?? throw new InvalidOperationException("JWT Audience is not configured.");
 builder.Services
     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(option =>
@@ -57,10 +76,10 @@ builder.Services
             ValidateAudience = true,
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
-            ValidIssuer = builder.Configuration["Jwt:Issuer"],
-            ValidAudience = builder.Configuration["Jwt:Audience"],
+            ValidIssuer = jwtIssuer,
+            ValidAudience = jwtAudience,
             IssuerSigningKey = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!)
+                Encoding.UTF8.GetBytes(jwtKey)
                 )
         };
     }
@@ -131,6 +150,7 @@ var app = builder.Build();
 //    await DbSeeder.SeedAsync(context);
 //}
 // Development pipeline
+
 app.UseSwagger();
 app.UseSwaggerUI(options =>
 {
@@ -149,6 +169,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseAuthentication();
+//app.UseMiddleware<RequestLoggingMiddleware>();
 app.UseAuthorization();
 app.MapControllers();
 

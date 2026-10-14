@@ -33,7 +33,7 @@ namespace pmService.Models
         public string Name_Pm { get; set; }
 
         [StringLength(250)]
-        public string Field_Rabet { get; set; }
+        public string? Field_Rabet { get; set; }
 
         public int? image { get; set; }
 
